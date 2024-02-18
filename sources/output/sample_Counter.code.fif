@@ -1,7 +1,3 @@
-ew-counter\
-ode_modules\\@tact-lang\\compiler\\stdlib\\stdlib.fc` `C:\\Users\\andre\\Desktop\\learning\\code\\ton\\Tact\
-ew-counter\
-ode_modules\\@tact-lang\\compiler\\stdlib\\stdlib_ex.fc` `C:/Users/andre/Desktop/learning/code/ton/Tact/new-counter/sources/output/sample_Counter.code.fc` incl:`C:/Users/andre/Desktop/learning/code/ton/Tact/new-counter/sources/output/sample_Counter.headers.fc` incl:`C:/Users/andre/Desktop/learning/code/ton/Tact/new-counter/sources/output/sample_Counter.stdlib.fc` incl:`C:/Users/andre/Desktop/learning/code/ton/Tact/new-counter/sources/output/sample_Counter.storage.fc` 
 PROGRAM{
   DECLPROC __tact_verify_address
   DECLPROC __tact_load_address
