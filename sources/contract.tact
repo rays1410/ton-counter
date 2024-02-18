@@ -1,39 +1,28 @@
+// this trait has to be imported
 import "@stdlib/deploy";
+import "@stdlib/ownable";
 
-message Add {
-    amount: Int as uint32;
-}
-
-contract SampleTactContract with Deployable {
-
+// the Deployable trait adds a default receiver for the "Deploy" message
+contract Counter with Deployable, Ownable {
+ 
+    val: Int as uint32;
     owner: Address;
-    counter: Int as uint32;
 
     init(owner: Address) {
+        self.val = 0;
         self.owner = owner;
-        self.counter = 0;
     }
-
-    fun add(v: Int) {
-        
-        // Check sender
-        let ctx: Context = context();
-        require(ctx.sender == self.owner, "Invalid sender");
-        
-        // Update counter
-        self.counter = (self.counter + v);
-    }
-
-    receive(msg: Add) {
-        self.add(msg.amount);
-    }
-
+ 
     receive("increment") {
-        self.add(1);
-        self.reply("incremented".asComment());
+        self.requireOwner();
+        self.val = self.val + 1;
+    }
+ 
+    get fun value(): Int {
+        return self.val;
     }
 
-    get fun counter(): Int {
-        return self.counter;
+    get fun getOwner(): Address {
+        return self.owner;
     }
 }

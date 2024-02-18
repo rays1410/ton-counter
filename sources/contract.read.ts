@@ -1,8 +1,6 @@
-import * as fs from "fs";
-import * as path from "path";
-import { Address, contractAddress, TonClient4 } from "ton";
-import { SampleTactContract } from "./output/sample_SampleTactContract";
-import { prepareTactDeployment } from "@tact-lang/deployer";
+import { Address, contractAddress } from "@ton/core";
+import { TonClient4 } from "@ton/ton";
+import { Counter } from "./output/sample_Counter";
 
 (async () => {
     const client = new TonClient4({
@@ -10,10 +8,8 @@ import { prepareTactDeployment } from "@tact-lang/deployer";
     });
 
     // Parameters
-    let testnet = true;
-    let packageName = "sample_SampleTactContract.pkg";
-    let owner = Address.parse("kQBM7QssP28PhrctDOyd47_zpFfDiQvv5V9iXizNopb1d2LB");
-    let init = await SampleTactContract.init(owner);
+    let owner = Address.parse("UQC7rSg92nmO9As7vkGGW1ZjmOvD_7Bpf12ac9o-DQxfP5bb");
+    let init = await Counter.init(owner);
     let contract_address = contractAddress(0, init);
 
     // Prepareing
@@ -21,7 +17,7 @@ import { prepareTactDeployment } from "@tact-lang/deployer";
     console.log(contract_address);
 
     // Input the contract address
-    let contract = await SampleTactContract.fromAddress(contract_address);
+    let contract = await Counter.fromAddress(contract_address);
     let contract_open = await client.open(contract);
-    console.log("Counter Value: " + (await contract_open.getCounter()));
+    console.log("Counter Value: " + (await contract_open.getValue()));
 })();
